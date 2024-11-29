@@ -1,0 +1,102 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 19vmin;
+  font-size: 2rem; /* Adjust size as needed */
+  font-weight: bold; /* Optional: makes the text stand out more */
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.COCLogo {
+  height: 15vmin;
+  pointer-events: auto;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+.Welcome  {
+  margin-top: 75px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding-top: 30px ;
+}
+
+.LanguageSelect {
+  margin-top: 50px;
+}
+
+.button-container{
+  margin-top: 30px;
+}
+
+/* Align the title in the center and back button on the left */
+.HomePageTitle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Position the back button on the left side */
+.BackButton {
+  position: absolute;
+  left: 20px; /* Adjust as needed for spacing */
+}
+
+/* Center the title in the remaining space */
+.HomePageTitle h1 {
+  margin: 0;
+}
+
+.ChoicesContainer .card {
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Ensure all card images are the same size and scale properly */
+.ChoicesContainer .card-img-top {
+  width: 100%;
+  height: 150px; /* Adjust height as needed for uniform sizing */
+  object-fit: contain; /* Ensures the entire image fits within the given dimensions */
+  border-radius: 5px; /* Optional: to match the Card component's style */
+  padding: 10px; /* Optional: add spacing around images */
+}
+
+.ChoicesContainer .row {
+  justify-content: center;
+}
+
+/* Fixed card height for uniformity */
+.ChoicesContainer .card {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card body styling for consistent spacing */
+.ChoicesContainer .card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Button alignment */
+.ChoicesContainer .btn {
+  margin-top: auto;
+}

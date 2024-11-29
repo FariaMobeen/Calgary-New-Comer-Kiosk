@@ -1,0 +1,77 @@
+:root {
+    --main-color: #c8102e;
+    --white-color: #ffffff;
+    --grey-light: #f8f9fa;
+    --dark-grey: #333333;
+    --medium-grey: #666666;
+    --hover-background: var(--main-color);
+    --hover-text: var(--white-color);
+
+    --background-color: #f8f9fa;
+    --hover-background-color: #f8e2de;
+    --button-color: #007bff;
+    --button-hover-color: #0056b3;
+    --text-color: #495057;
+    --border-color: #ced4da;
+}
+
+
+.GovernmentServicesPage {
+    padding: 20px;
+    position: relative;
+}
+
+.GovernmentServicesPage .header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+.GovernmentServicesPage .header-container h1 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 2rem;
+}
+
+.GovernmentServicesPage .accordion-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.GovernmentServicesPage .description-section {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    list-style-type: none;
+
+}
+
+.GovernmentServicesPage .button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+
+}
+
+.GovernmentServicesPage .learn-more-btn {
+    background-color: var(--white-color);
+    border: 2px solid var(--main-color);
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--main-color);
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.GovernmentServicesPage .map-btn {
+    background-color: var(--white-color);
+    border: 2px solid var(--main-color);
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--main-color);
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}

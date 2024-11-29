@@ -1,0 +1,38 @@
+:root {
+    --red: #c8102e;
+    --white: #ffffff;
+}
+
+.EmergencyServices {
+    padding: 20px;
+}
+
+.EmergencyServices h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.accordion-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.button {
+    background-color: var(--white);
+    border: 2px solid var(--red);
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--red);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.in-line-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
