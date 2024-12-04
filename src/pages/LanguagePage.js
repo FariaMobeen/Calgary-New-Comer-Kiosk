@@ -10,7 +10,7 @@ const navigate = useNavigate();
 <>
 
     <div className="LanguageSelect">
-      <h1 className='Welcome'> Select Your Language</h1>
+      <h1 className='Welcome'> Please Select Your Language</h1>
       <div className="button-container">
         <Button variant="danger" size="lg" onClick={() => navigate('/home')}>English</Button>
         <Button variant="danger" size="lg" onClick={() => navigate('/home/french')}>Français</Button>

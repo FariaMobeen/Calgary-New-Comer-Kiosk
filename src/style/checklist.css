@@ -3,13 +3,9 @@
     --white: #ffffff;
 }
 
-.Checklist {
-    padding: 20px;
-}
-
 .Checklist h1 {
     margin-bottom: 20px;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .accordion-container {

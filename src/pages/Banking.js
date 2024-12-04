@@ -104,9 +104,9 @@ function Banking() {
                                 <Card.Text>Distance: {bank.distance} km</Card.Text>
                                 <Card.Text>Rating: {bank.rating} ⭐</Card.Text>
                                 <div className="action-buttons">
-                                    <Button variant="outline-primary" onClick={() => openMapPopup(bank.name)}>📍</Button>
-                                    <Button variant="outline-secondary" onClick={() => handleWarningModal(bank)}>View Website</Button>
-                                    <Button variant="outline-info" onClick={() => handleShow(bank.image)}>
+                                    <Button variant="primary" onClick={() => openMapPopup(bank.name)}>View on Map📍</Button>
+                                    <Button variant="primary" onClick={() => handleWarningModal(bank)}>View Website</Button>
+                                    <Button variant="primary" onClick={() => handleShow(bank.image)}>
                                         View on Mobile
                                     </Button>
                                 </div>

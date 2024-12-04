@@ -17,7 +17,6 @@
 
 
 .GovernmentServicesPage {
-    padding: 20px;
     position: relative;
 }
 
@@ -26,13 +25,13 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 .GovernmentServicesPage .header-container h1 {
     flex: 1;
     text-align: center;
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .GovernmentServicesPage .accordion-container {

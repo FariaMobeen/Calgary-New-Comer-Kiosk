@@ -7,7 +7,7 @@ function Header() {
   return (
     <header className="App-header">
       <img src={COC_Logo} alt="City of Calgary logo" className="COCLogo" />
-      Newcomer Services Kiosk
+      <h1>Newcomer Services Kiosk</h1>
     </header>
   );
 }

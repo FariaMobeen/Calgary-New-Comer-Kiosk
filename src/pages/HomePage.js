@@ -16,6 +16,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import BackButton from '../components/BackButton.js';
 
 
 function HomePage() {
@@ -25,12 +26,12 @@ function HomePage() {
   return (
     <>
       <div className='HomePageTitle'>
-      <Button 
-      className="BackButton"
-      variant="danger"
-      size="lg"
-      onClick={() => navigate('/')}><i class="bi bi-arrow-left"></i> Back</Button>
-        <h1>Home Page</h1>
+        <Button 
+        className="BackButton1"
+        variant="danger"
+        size="lg"
+        onClick={() => navigate('/')}><i class="bi bi-arrow-left"></i> Back</Button>
+        <h1>What do you need help with?</h1>
       </div>
 
       <Container className="ChoicesContainer">
@@ -50,7 +51,7 @@ function HomePage() {
           <Card style={{ width: '18rem', height: '18rem' }}>
               <Card.Img variant="top" src={Map} />
               <Card.Body className="card-body">
-                <Card.Title>View Map of Calgary</Card.Title>
+                <Card.Title>Map Information</Card.Title>
                 <Button variant="success" onClick={() => navigate('/map')}>Select</Button>
               </Card.Body>
             </Card>
@@ -113,7 +114,7 @@ function HomePage() {
           <Card style={{ width: '18rem', height: '18rem' }}>
               <Card.Img variant="top" src={Shopping} />
               <Card.Body className="card-body">
-                <Card.Title>Shopping</Card.Title>
+                <Card.Title>Shopping Information</Card.Title>
                 <Button variant="success" onClick={() => navigate('/shopping')}>Select</Button>
               </Card.Body>
             </Card>

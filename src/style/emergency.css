@@ -3,13 +3,8 @@
     --white: #ffffff;
 }
 
-.EmergencyServices {
-    padding: 20px;
-}
-
 .EmergencyServices h1 {
-    margin-bottom: 20px;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .accordion-container {

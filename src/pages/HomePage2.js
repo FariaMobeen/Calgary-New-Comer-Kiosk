@@ -25,11 +25,11 @@ function HomePage2() {
     <>
       <div className='HomePageTitle'>
       <Button
-      className="BackButton"
+      className="BackButton1"
       variant="danger"
       size="lg"
       onClick={() => navigate('/')}><i class="bi bi-arrow-left"></i> Revenir</Button>
-        <h1>Page d'accueil</h1>
+        <h1>Pour quoi avez-vous besoin d’aide?</h1>
       </div>
 
       <Container className="ChoicesContainer">
@@ -49,7 +49,7 @@ function HomePage2() {
           <Card style={{ width: '18rem', height: '18rem' }}>
               <Card.Img variant="top" src={Map} />
               <Card.Body className="card-body">
-                <Card.Title>Voir la carte de Calgary</Card.Title>
+                <Card.Title>Informations cartographiques</Card.Title>
                 <Button variant="success" onClick={() => navigate('/')}>Sélectionner</Button>
               </Card.Body>
             </Card>
@@ -103,7 +103,7 @@ function HomePage2() {
           <Card style={{ width: '18rem', height: '18rem' }}>
               <Card.Img variant="top" src={Resources} />
               <Card.Body className="card-body">
-                <Card.Title>Resources</Card.Title>
+                <Card.Title>Ressources</Card.Title>
                 <Button variant="success" onClick={() => navigate('/resources')}>Sélectionner</Button>
               </Card.Body>
             </Card>
