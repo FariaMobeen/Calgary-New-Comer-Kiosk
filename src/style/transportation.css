@@ -145,3 +145,9 @@
     background-color: var(--main-color);
     color: var(--white-color);
 }
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: -30px;
+}

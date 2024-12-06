@@ -5,6 +5,10 @@ import Modal from 'react-bootstrap/Modal';
 import NavigationBar from '../components/NavigationBar';
 import '../style/GovernmentServicesPage.css';
 
+import immigrationQR from '../images/governmentQR/immigrationQR.png';
+import legalServicesQR from '../images/governmentQR/legalServicesQR.png';
+import serviceCanadaQR from '../images/governmentQR/serviceCanadaQR.png';
+
 const servicesData = [
     {
         title: 'Service Canada',
@@ -20,6 +24,7 @@ const servicesData = [
         ),
         learnMoreUrl: "https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html",
         mapUrl: "https://www.google.com/maps?q=Service+Canada",
+        qr: serviceCanadaQR
     },
     {
         title: 'Immigration',
@@ -35,6 +40,7 @@ const servicesData = [
         ),
         learnMoreUrl: "https://www.canada.ca/en/services/immigration-citizenship.html",
         mapUrl: "https://www.google.com/maps?q=Immigration",
+        qr: immigrationQR
     },
     {
         title: 'Legal Services',
@@ -54,23 +60,37 @@ const servicesData = [
         ),
         learnMoreUrl: "https://clg.ab.ca/",
         mapUrl: "https://www.google.com/maps?q=Legal+Services",
+        qr: legalServicesQR
     }
 ];
 
 function GovernmentServicesPage() {
-    const [showModal, setShowModal] = useState(false);
+    const [showWarningModal, setShowWarningModal] = useState(false);
+    const [showQRModal, setShowQRModal] = useState(false);
     const [redirectUrl, setRedirectUrl] = useState('');
+    const [currentQR, setCurrentQR] = useState('');
 
-    const handleShowModal = (url) => {
-        setRedirectUrl(url);
-        setShowModal(true);
+    // Show the QR code modal
+    const handleShowQRModal = (qrImage) => {
+        setCurrentQR(qrImage);
+        setShowQRModal(true);
     };
 
-    const handleCloseModal = () => setShowModal(false);
+    // Show the warning modal
+    const handleShowWarningModal = (url) => {
+        setRedirectUrl(url);
+        setShowWarningModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowWarningModal(false);
+        setShowQRModal(false);
+        setCurrentQR(''); // Reset the QR when modal is closed
+    };
 
     const handleConfirmRedirect = () => {
         window.open(redirectUrl, 'Popup', 'width=800,height=600,menubar=no,toolbar=no,location=no,status=no');
-        setShowModal(false);
+        setShowWarningModal(false);
     };
 
     return (
@@ -92,18 +112,25 @@ function GovernmentServicesPage() {
                                     </div>
                                     <div className="button-section">
                                         <Button
+                                            variant="secondary"
+                                            className="map-btn"
+                                            onClick={() => window.open(service.mapUrl, 'MapPopup', 'width=800,height=600,menubar=no,toolbar=no,location=no,status=no')}
+                                        >
+                                            View on Map 📍
+                                        </Button>
+                                        <Button
                                             variant="primary"
-                                            className="learn-more-btn"
-                                            onClick={() => handleShowModal(service.learnMoreUrl)}
+                                            className="map-btn"
+                                            onClick={() => handleShowWarningModal(service.learnMoreUrl)}
                                         >
                                             View Website
                                         </Button>
                                         <Button
                                             variant="secondary"
                                             className="map-btn"
-                                            onClick={() => handleShowModal(service.mapUrl)}
+                                            onClick={() => handleShowQRModal(service.qr)}
                                         >
-                                            View on Map 📍
+                                            View on Mobile
                                         </Button>
                                     </div>
                                 </Accordion.Body>
@@ -111,25 +138,40 @@ function GovernmentServicesPage() {
                         ))}
                     </Accordion>
                 </div>
-            </div>
 
-            {/* Warning Modal */}
-            <Modal show={showModal} onHide={handleCloseModal} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Warning</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    You are about to leave this page and visit an external website. Are you sure you want to continue?
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={handleConfirmRedirect}>
-                        Continue
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                {/* Warning Modal */}
+                <Modal show={showWarningModal} onHide={handleCloseModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Caution</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Please do not enter any personal or sensitive information on external websites. If you need to access anything confidential, please select "View on Mobile".</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseModal}>
+                            Go Back
+                        </Button>
+                        <Button variant="primary" onClick={handleConfirmRedirect}>
+                            I Understand
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                {/* QR Code Modal */}
+                <Modal show={showQRModal} onHide={handleCloseModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>View Mobile Site</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <img src={currentQR} alt="QR Code" style={{ width: '100%' }} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseModal}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </>
     );
 }

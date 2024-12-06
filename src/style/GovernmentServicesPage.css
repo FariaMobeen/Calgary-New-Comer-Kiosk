@@ -74,3 +74,7 @@
     transition: background-color 0.3s, color 0.3s;
     cursor: pointer;
 }
+.GovernmentServicesPage .map-btn:hover {
+    background-color: var(--main-color);
+    color: var(--white-color);
+}

@@ -117,7 +117,7 @@ function Banking() {
             </div>
             <Modal show={showWarningModal} onHide={() => setShowWarningModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Caution</Modal.Title>
+                    <Modal.Title>External Link Warning</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Please do not enter any personal or sensitive information on external websites. If you need to access anything confidential, please select "View on Mobile".</p>

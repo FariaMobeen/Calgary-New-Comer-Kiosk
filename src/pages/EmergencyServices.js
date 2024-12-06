@@ -75,10 +75,10 @@ function EmergencyServices() {
                                 {item.title === 'All City of Calgary Emergency Services' && (
                                     <>
                                         <div className="in-line-buttons">
-                                            <p><Button className="button" onClick={() => {
+                                            <Button className="button" onClick={() => {
                                                 setCurrentUrl("https://www.calgary.ca/our-services/911.html");
                                                 setShowWarningModal(true);
-                                            }}>View Website</Button></p>
+                                            }}>View Website</Button>
                                             <Button className="button" onClick={() => handleShow(CoCQR)}>View on Mobile</Button>
                                         </div>
                                     </>

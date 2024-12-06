@@ -5,6 +5,14 @@ import Modal from 'react-bootstrap/Modal';
 import '../style/transportation.css'; 
 import uberQR from '../images/uberQR.png';
 import lyftQR from '../images/lyftQR.png'; 
+import budgetQR from '../images/transportationQR/budgetQR.png'; 
+import entQR from '../images/transportationQR/entQR.png'; 
+import nationalQR from '../images/transportationQR/nationalQR.png'; 
+import hertzQR from '../images/transportationQR/hertzQR.png';
+import checkerQR from '../images/transportationQR/checkerQR.png'; 
+import assoQR from '../images/transportationQR/assoQR.png'; 
+import unitedQR from '../images/transportationQR/unitedQR.png'; 
+import transitQR from '../images/transportationQR/transitQR.png'; 
 import NavigationBar from '../components/NavigationBar';
 
 function Transportation() {
@@ -22,12 +30,7 @@ function Transportation() {
     ];
 
     const sortAccordionItems = (items) => {
-        if (sortCriteria === 'lowToHigh') {
-            return [...items].sort((a, b) => a.price.localeCompare(b.price));
-        } else if (sortCriteria === 'highToLow') {
-            return [...items].sort((a, b) => b.price.localeCompare(a.price));
-        }
-        return [...items];
+        return [...items].sort((a, b) => a.price.localeCompare(b.price));
     };
 
     const handleSortChange = (e) => {
@@ -58,21 +61,12 @@ function Transportation() {
         setTargetUrl(url);
         setWarningModal(true);
     };
-
     return (
         <>
         <NavigationBar />
         <div className="Transportation">
             <div className="header-container">
                 <h1>Transportation</h1>
-                <div className="sort-container">
-                    <label htmlFor="sort">Sort by Price:</label>
-                    <select id="sort" value={sortCriteria} onChange={handleSortChange}>
-                        <option value="none">Default</option>
-                        <option value="lowToHigh">Low to High</option>
-                        <option value="highToLow">High to Low</option>
-                    </select>
-                </div>
             </div>
 
             <div className="accordion-container">
@@ -87,19 +81,31 @@ function Transportation() {
                                         <ul>
                                             <li className="ride-share-option">
                                                 <strong>Budget:</strong> Affordable rental options for every budget.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://www.budget.com/en/home")}>View Website</Button>
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://www.budget.com/en/home")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(budgetQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                             <li className="ride-share-option">
                                                 <strong>Enterprise:</strong> Reliable rental cars for all your travel needs.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://www.enterprise.com/en/home.html")}>View Website</Button>
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://www.enterprise.com/en/home.html")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(entQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                             <li className="ride-share-option">
                                                 <strong>Hertz:</strong> Convenient rentals with a wide range of choices.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://www.hertz.com/rentacar/reservation/")}>View Website</Button>
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://www.hertz.com/rentacar/reservation/")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(hertzQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                             <li className="ride-share-option">
                                                 <strong>National:</strong> Quality vehicles for business or vacation.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://www.nationalcar.com/en/home.html")}>View Website</Button>
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://www.nationalcar.com/en/home.html")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(nationalQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                         </ul>
                                     </>
@@ -110,15 +116,24 @@ function Transportation() {
                                         <ul>
                                             <li className="taxi-service-option">
                                                 <strong>Checker Cabs:</strong> Calgary's largest fleet, offering accessible and affordable rides.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://www.thecheckergroup.com/")}>View Website</Button>
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://www.thecheckergroup.com/")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(checkerQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                             <li className="taxi-service-option">
-                                                <strong>United Cabs:</strong> Known for excellent service, available 24/7.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://calgarycabs.ca/")}>View Website</Button>
+                                                <strong>Calgary United Cabs:</strong> A reliable choice for quick and safe transportation.
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://calgarycabs.ca/")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(unitedQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                             <li className="taxi-service-option">
-                                                <strong>Airport Taxi:</strong> Specialized in airport transfers with spacious vehicles.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://www.yyc.com/en-us/transportation/taxis-sedans")}>View Website</Button>
+                                                <strong>Associated Cabs:</strong> A trusted name in Calgary for over 40 years.
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://www.yyc.com/en-us/transportation/taxis-sedans")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(assoQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                         </ul>
                                     </>
@@ -130,7 +145,10 @@ function Transportation() {
                                                 <h5>Calgary Transit</h5>
                                                 <strong>Fares:</strong> $3.50 for adults, $2.50 for youth, $1.75 for seniors.
                                                 <strong>Hours of Service:</strong> Buses: 5 AM to midnight, Trains: 4 AM to 1 AM.
-                                                <Button variant="primary" onClick={() => handleVisitWebsite("https://www.calgarytransit.com/")}>View Website</Button>
+                                                <div className="button-container">
+                                                    <Button variant="primary" onClick={() => handleVisitWebsite("https://www.calgarytransit.com/")}>View Website</Button>
+                                                    <Button variant="primary" onClick={() => handleShow(transitQR)}>View on Mobile</Button>
+                                                </div>
                                             </li>
                                         </ul>
                                     </>
@@ -157,7 +175,7 @@ function Transportation() {
             </div>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Download App</Modal.Title>
+                    <Modal.Title>View Mobile Site</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <img src={currentImage} alt="Download QR Code" style={{ width: '100%' }} />
@@ -168,10 +186,10 @@ function Transportation() {
             </Modal>
             <Modal show={warningModal} onHide={handleWarningClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>External Link Warning</Modal.Title>
+                    <Modal.Title>Caution</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Please do not enter any personal or sensitive information on external websites.
+                    Please do not enter any personal or sensitive information on external websites. If you need to access anything confidential, please select "View on Mobile".
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleWarningClose}>Go Back</Button>

@@ -46,20 +46,21 @@ function Map() {
             <h1>Map</h1>
             <br />
             <p>
-                <Button 
-                    className="button" 
-                    onClick={() => handleShow()}
-                >
-                    Map Instructions
-                </Button>
+  <Button 
+    className="button" 
+    style={{ marginRight: '10px' }}
+    onClick={() => handleShow()}
+  >
+    Map Instructions
+  </Button>
 
-                <Button 
-                    className="button" 
-                    onClick={() => navigate("/transportation")}
-                >
-                    Transportation Info Page
-                </Button>
-            </p>
+  <Button 
+    className="button" 
+    onClick={() => navigate("/transportation")}
+  >
+    Transportation Info Page
+  </Button>
+</p>
 
             <p>
                 <Button 
@@ -74,6 +75,7 @@ function Map() {
                 <Button 
                     className={`button ${selectedCategory === 'Hotels' ? 'selected' : ''}`}
                     onClick={() => handleCategoryClick('Hotels')} 
+                    
                     variant="outline-primary"
                 >
                     Hotels

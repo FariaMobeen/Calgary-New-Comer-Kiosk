@@ -16,7 +16,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import BackButton from '../components/BackButton.js';
+import EndSessionModal from '../components/EndSessionModal.js';
 
 
 function HomePage() {
@@ -25,12 +25,12 @@ function HomePage() {
 
   return (
     <>
+<div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '16px', paddingRight:'16px' }}>
+  <EndSessionModal />
+</div>
+
       <div className='HomePageTitle'>
-        <Button 
-        className="BackButton1"
-        variant="danger"
-        size="lg"
-        onClick={() => navigate('/')}><i class="bi bi-arrow-left"></i> Back</Button>
+       
         <h1>What do you need help with?</h1>
       </div>
 

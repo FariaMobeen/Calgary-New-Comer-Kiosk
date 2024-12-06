@@ -11,7 +11,7 @@ import NavigationBar from '../components/NavigationBar';
 
 
 function Shopping() {
-    const [sortCriteria, setSortCriteria] = useState('none');
+    const [sortCriteria, setSortCriteria] = useState('price');
     const [showModal, setShowModal] = useState(false);
     const [currentImage, setCurrentImage] = useState('');
     const [selectedCategories, setSelectedCategories] = useState(new Set()); 
@@ -129,28 +129,17 @@ function Shopping() {
     };
 
     const toggleCategory = (category) => {
-      setSelectedCategories((prevCategories) => {
-          const newCategories = new Set(prevCategories);
-  
-          if (category === "") { // If "All" is selected
-              newCategories.clear(); // Clear any selected categories
-          } else {
-              // Toggle the selected category
-              if (newCategories.has(category)) {
-                  newCategories.delete(category);
-              } else {
-                  newCategories.add(category);
-              }
-          }
-  
-          // If no categories are selected, show "All"
-          if (newCategories.size === 0) {
-              return new Set(); // Return empty set to show "All" results
-          }
-  
-          return newCategories;
-      });
+        setSelectedCategories(() => {
+            if (category === "") {
+                return new Set(); // If "All" is selected, clear all other selections.
+            } else {
+                const newCategories = new Set();
+                newCategories.add(category); // Only add the clicked category.
+                return newCategories;
+            }
+        });
     };
+    
 
     const filteredAndSortedItems = sortAccordionItems(
         accordionItems.filter(item =>
@@ -201,23 +190,24 @@ function Shopping() {
             <div className="filter-buttons">
                 {['All', 'Clothing', 'Furniture', 'Food', 'Appliances', 'Hardware', 'Other'].map(category => (
                     <Button
-                      key={category}
-                      variant={
-                          (category === "All" && selectedCategories.size === 0) || 
-                          selectedCategories.has(category)
-                              ? 'primary'
-                              : 'outline-primary'
-                      }
-                      onClick={() => toggleCategory(category === "All" ? "" : category)}
-                      style={{
-                          backgroundColor: (category === "All" && selectedCategories.size === 0) || selectedCategories.has(category) ? 'black' : '#808080',
-                          color: 'white',
-                          border: '1px solid black', // black outline
-                          margin: '5px' // add spacing between buttons
-                      }}
-                    >
-                        {category.charAt(0).toUpperCase() + category.slice(1)}
-                    </Button>
+                    key={category}
+                    variant={
+                        (category === "All" && selectedCategories.size === 0) || 
+                        selectedCategories.has(category)
+                            ? 'primary'
+                            : 'outline-primary'
+                    }
+                    onClick={() => toggleCategory(category === "All" ? "" : category)}
+                    style={{
+                        backgroundColor: (category === "All" && selectedCategories.size === 0) || selectedCategories.has(category) ? 'black' : '#808080',
+                        color: 'white',
+                        border: '1px solid black', // black outline
+                        margin: '5px' // add spacing between buttons
+                    }}
+                  >
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </Button>
+                  
                 ))}
             </div>
 
@@ -246,46 +236,46 @@ function Shopping() {
                                     <p>Walmart is a large retail store that offers a wide variety of products, including groceries, clothing, electronics, and household items, often at lower prices. 
                                       It provides a one-stop shopping experience, making it convenient for customers to find everything they need in one place.</p>
                                     <div className="in-line">
+                                        <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("walmart")}>View on Map📍</Button></p>
                                         <p><Button className="button" onClick={() => handleWarningModal("https://www.walmart.ca/en")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(WalmartQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("walmart")}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === 'Thrift Stores' && (
                                   <>
                                     <p>Calgary has several thrift stores where you can find secondhand clothes, furniture and household items at affordable prices.</p>
                                     <div className="in-line">
+                                        <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("thrift stores")}>View on Map📍</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("thrift stores")}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === 'Home Hardware' && (
                                   <>
                                     <p>Home Hardware sells of various materials and tools for home improvement and construction projects.</p>
                                     <div className="in-line">
+                                        <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("home hardware")}>View on Map📍</Button></p>
                                         <p><Button className="button" onClick={() => handleWarningModal("https://www.homehardware.ca/en/")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(HHQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("home hardware")}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === 'Canadian Tire' && (
                                   <>
                                     <p>Canadian Tire sells various products for home, vehicles, sports, and leisure.</p>
                                     <div className="in-line">
+                                        <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("canadian tire")}>View on Map📍</Button></p>
                                         <p><Button className="button" onClick={() => handleWarningModal("https://www.canadiantire.ca/en.html")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(CTQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("canadian tire")}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === 'Shopping Malls' && (
                                   <>
                                     <p>Calgary has several shopping malls. Malls have multiple stores that sell new clothing, furniture, and many other products.</p>
                                     <div className="in-line">
-                                    </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("shopping malls")}>📍</Button></p>
+                                        <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("shopping malls")}>View on Map📍</Button></p>
+                                    </div>              
                                   </>
                                 )}
                             </Accordion.Body>

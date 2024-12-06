@@ -13,7 +13,7 @@ import NavigationBar from '../components/NavigationBar';
 
 
 function Resources() {
-    const [sortCriteria, setSortCriteria] = useState('none');
+    const [sortCriteria, setSortCriteria] = useState('relevancy');
     const [showModal, setShowModal] = useState(false);
     const [currentImage, setCurrentImage] = useState('');
     const [selectedCategories, setSelectedCategories] = useState(new Set()); 
@@ -137,29 +137,17 @@ function Resources() {
     };
 
     const toggleCategory = (category) => {
-      setSelectedCategories((prevCategories) => {
-          const newCategories = new Set(prevCategories);
-  
-          if (category === "") { // If "All" is selected
-              newCategories.clear(); // Clear any selected categories
+      setSelectedCategories(() => {
+          if (category === "") {
+              return new Set(); // If "All" is selected, clear all other selections.
           } else {
-              // Toggle the selected category
-              if (newCategories.has(category)) {
-                  newCategories.delete(category);
-              } else {
-                  newCategories.add(category);
-              }
+              const newCategories = new Set();
+              newCategories.add(category); // Only add the clicked category.
+              return newCategories;
           }
-  
-          // If no categories are selected, show "All"
-          if (newCategories.size === 0) {
-              return new Set(); // Return empty set to show "All" results
-          }
-  
-          return newCategories;
       });
     };
-
+  
     const filteredAndSortedItems = sortAccordionItems(
         accordionItems.filter(item =>
           // Ensure that every selected category is in the item's categories
@@ -204,23 +192,24 @@ function Resources() {
             <div className="filter-buttons">
                 {['All', 'Employment', 'Finances', 'Housing', 'Food', 'Childcare', 'Communities', 'Mental Health', 'Other'].map(category => (
                     <Button
-                      key={category}
-                      variant={
-                          (category === "All" && selectedCategories.size === 0) || 
-                          selectedCategories.has(category)
-                              ? 'primary'
-                              : 'outline-primary'
-                      }
-                      onClick={() => toggleCategory(category === "All" ? "" : category)}
-                      style={{
-                          backgroundColor: (category === "All" && selectedCategories.size === 0) || selectedCategories.has(category) ? 'black' : '#808080',
-                          color: 'white',
-                          border: '1px solid black', // black outline
-                          margin: '5px' // add spacing between buttons
-                      }}
-                    >
-                        {category.charAt(0).toUpperCase() + category.slice(1)}
-                    </Button>
+                    key={category}
+                    variant={
+                        (category === "All" && selectedCategories.size === 0) || 
+                        selectedCategories.has(category)
+                            ? 'primary'
+                            : 'outline-primary'
+                    }
+                    onClick={() => toggleCategory(category === "All" ? "" : category)}
+                    style={{
+                        backgroundColor: (category === "All" && selectedCategories.size === 0) || selectedCategories.has(category) ? 'black' : '#808080',
+                        color: 'white',
+                        border: '1px solid black', // black outline
+                        margin: '5px' // add spacing between buttons
+                    }}
+                  >
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </Button>
+                  
                 ))}
             </div>
 
@@ -246,50 +235,55 @@ function Resources() {
                                   <>
                                     <p>Immigrant Services Calgary offers a range of services to support people who are settling into a new life in Canada, including: job support, translation, English testing, and help for families.</p>
                                     <div className="in-line">
+                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>View on Map 📍</Button></p>
+
                                         <p><Button className="button" onClick={() => handleWarningModal("https://www.immigrantservicescalgary.ca/")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(ImmigrantServicesCalgaryQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === 'Calgary Public Library' && (
                                   <>
                                     <p>Calgary Public Library provides free access to the internet and books. They also provide different services and programs which you can explore on their website.</p>
                                     <div className="in-line">
+                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("library")}>View on Map📍</Button></p>
+
                                         <p><Button className="button" onClick={() => handleWarningModal("https://www.calgarylibrary.ca/")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(CPLQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup("library")}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === "Calgary Immigrant Women's Association" && (
                                   <>
                                     <p>CIWA supports immigrant and refugee women, girls and their families. They have numerous services that include employement, housing, childcare and mental health.</p>
                                     <div className="in-line">
+                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>View on Map 📍</Button></p>
+
                                         <p><Button className="button" onClick={() => handleWarningModal("https://ciwa-online.com/")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(CIWAQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === 'Calgary Food Bank' && (
                                   <>
                                     <p>Calgary Food Bank is the first line of emergency food support for individuals and families in need.</p>
                                     <div className="in-line">
+                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>View on Map 📍</Button></p>
+
                                         <p><Button className="button" onClick={() => handleWarningModal("https://www.calgaryfoodbank.com/")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(FoodBankQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>📍</Button></p>
                                   </>
                                 )}
                                 {item.title === 'Centre for Newcomers' && (
                                   <>
                                     <p>Centre for Newcomers is a key resource for immigrants and refugees. Their services include employment, mental health, childcare and finding communities.</p>
                                     <div className="in-line">
+                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>View on Map 📍</Button></p>
+
                                         <p><Button className="button" onClick={() => handleWarningModal("https://www.centrefornewcomers.ca/")}>View Website</Button></p>
                                         <p><Button className="button" onClick={() => handleShow(CentreForNewcomersQR)}>View on Mobile</Button></p>
                                     </div>
-                                    <p><Button variant="outline-primary" className = "button" onClick={() => openMapPopup(item.location.lat, item.location.lon)}>📍</Button></p>
                                   </>
                                 )}
                             </Accordion.Body>
