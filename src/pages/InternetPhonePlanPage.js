@@ -127,7 +127,7 @@ function InternetPhonePlanPage() {
                     <Modal.Title>Caution</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Please do not enter any personal or sensitive information on external websites.</p>
+                <p>Please do not enter any personal or sensitive information on external websites. If you need to access anything confidential, please select "View on Mobile".</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowWarningModal(false)}>Go Back</Button>

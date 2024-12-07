@@ -15,6 +15,7 @@ import Shopping from '../images/shopping.png';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import FEndSessionModal from '../components/FEndSessionModal.js';
 
 function HomePage2() {
   localStorage.clear();
@@ -23,12 +24,10 @@ function HomePage2() {
 
   return (
     <>
+    <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '16px', paddingRight:'16px' }}>
+    <FEndSessionModal />
+    </div>
       <div className='HomePageTitle'>
-      <Button
-      className="BackButton1"
-      variant="danger"
-      size="lg"
-      onClick={() => navigate('/')}><i class="bi bi-arrow-left"></i> Revenir</Button>
         <h1>Pour quoi avez-vous besoin d’aide?</h1>
       </div>
 
