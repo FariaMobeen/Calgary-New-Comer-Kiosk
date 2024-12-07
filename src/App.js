@@ -2,7 +2,6 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import COC_Logo from './images/logo-cityofcalgary.png';
 import './App.css';
-// import LanguageButton from './components/LanguageButton';
 import HomePage from './pages/HomePage';
 import HomePage2 from './pages/HomePage2';
 import Banking from './pages/Banking';

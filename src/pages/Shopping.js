@@ -3,7 +3,6 @@ import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../style/shopping.css'; 
-//import '../style/transportation.css'; 
 import WalmartQR from '../images/shopping-images/walmartQR.png';
 import HHQR from '../images/shopping-images/HHQR.png';
 import CTQR from '../images/shopping-images/CTQR.png';
@@ -15,7 +14,7 @@ function Shopping() {
     const [showModal, setShowModal] = useState(false);
     const [currentImage, setCurrentImage] = useState('');
     const [selectedCategories, setSelectedCategories] = useState(new Set()); 
-    const [currentLocation, setCurrentLocation] = useState(null); // Store the kiosk's current location
+    const [currentLocation, setCurrentLocation] = useState(null);
     const [showWarningModal, setShowWarningModal] = useState(false);
     const [link, setLink] = useState(null);
   
@@ -25,55 +24,52 @@ function Shopping() {
           eventKey: '1', 
           categories: ['Clothing', 'Furniture', 'Hardware'], 
           price: '$', 
-          location: { lat: 51.047319552154356, lon: -114.08203417196579 } //there are multiple locations
+          location: { lat: 51.047319552154356, lon: -114.08203417196579 }
       },
       { 
           title: 'Walmart', 
           eventKey: '0', 
           categories: ['Clothing', 'Furniture', 'Hardware','Appliances', 'Food', 'Other'], 
           price: '$$',
-          location: { lat: 51.041031747066654, lon: -114.13960017972096}//there are multiple locations
+          location: { lat: 51.041031747066654, lon: -114.13960017972096}
       },
       { 
           title: 'Shopping Malls', 
           eventKey: '2', 
           categories: ['Clothing', 'Furniture', 'Other'], 
           price: '$$$',
-          location: { lat: 51.049541664802106, lon: -114.06064574442266 } //multiple
+          location: { lat: 51.049541664802106, lon: -114.06064574442266 }
       },
       { 
           title: 'Home Hardware', 
           eventKey: '3', 
           categories: ['Hardware', 'Appliances'], 
           price: '$$',
-          location: { lat: 51.00968981939483, lon: -114.03606763136762} //multiple
+          location: { lat: 51.00968981939483, lon: -114.03606763136762}
       },
       { 
           title: 'Canadian Tire', 
           eventKey: '4', 
           categories: ['Hardware', 'Appliances', 'Other'], 
           price: '$$',
-          location: { lat: 51.0564432534392, lon: -113.983542560201} //multiple
+          location: { lat: 51.0564432534392, lon: -113.983542560201}
       },
     ];
   
 
     useEffect(() => {
                 setCurrentLocation({
-                    //lat: position.coords.latitude,
-                    //lon: position.coords.longitude,
-                    lat: 51.044313574830255,//default location (calgary tower)
+                    lat: 51.044313574830255,
                     lon: -114.06309093347211,
                 });
     }, []);
 
-    // Function to calculate distance between two locations
     const calculateDistance = (loc1, loc2) => {
       if (!loc1 || !loc2 || loc1.lat === undefined || loc1.lon === undefined || loc2.lat === undefined || loc2.lon === undefined) {
-          return Infinity; // Return a large distance if any location data is missing
+          return Infinity;
       }
   
-      const R = 6371; // Radius of the Earth in km
+      const R = 6371;
       const dLat = (loc2.lat - loc1.lat) * (Math.PI / 180);
       const dLon = (loc2.lon - loc1.lon) * (Math.PI / 180);
       const a =
@@ -82,7 +78,7 @@ function Shopping() {
           Math.cos(loc2.lat * (Math.PI / 180)) *
           Math.sin(dLon / 2) * Math.sin(dLon / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      return R * c; // Distance in km
+      return R * c;
     };
 
     const priceScale = {
@@ -90,9 +86,7 @@ function Shopping() {
       '$$': 2,
       '$$$': 3,
       '$$$$': 4,
-      // Add more levels if necessary
     };
-    // Sort items by proximity or price
     const sortAccordionItems = (items) => {
       if (sortCriteria === 'proximity') {
           return [...items].sort((a, b) => 
@@ -104,7 +98,7 @@ function Shopping() {
               let priceB = priceScale[b.price] || 0;
   
               if (priceA !== priceB) {
-                  return priceA - priceB; // Ascending order
+                  return priceA - priceB;
               }
   
               return calculateDistance(currentLocation, a.location) - calculateDistance(currentLocation, b.location);
@@ -131,10 +125,10 @@ function Shopping() {
     const toggleCategory = (category) => {
         setSelectedCategories(() => {
             if (category === "") {
-                return new Set(); // If "All" is selected, clear all other selections.
+                return new Set();
             } else {
                 const newCategories = new Set();
-                newCategories.add(category); // Only add the clicked category.
+                newCategories.add(category);
                 return newCategories;
             }
         });
@@ -143,7 +137,6 @@ function Shopping() {
 
     const filteredAndSortedItems = sortAccordionItems(
         accordionItems.filter(item =>
-          // Ensure that every selected category is in the item's categories
           [...selectedCategories].every(selectedCategory => item.categories.includes(selectedCategory))
         )
     );
@@ -155,14 +148,12 @@ function Shopping() {
 
     const openMapPopup = (destLatOrType, destLon) => {
         if (typeof destLatOrType === 'string') {
-          // If a string like "mall" is passed, open a search on Google Maps
           const { lat, lon } = currentLocation || {};
-          const searchQuery = encodeURIComponent(destLatOrType); // Encode the search term
+          const searchQuery = encodeURIComponent(destLatOrType);
           const mapsUrl = `https://www.google.com/maps/search/${searchQuery}/@${lat},${lon},15z`;
           window.open(mapsUrl, 'MapPopup', 'width=800,height=600,menubar=no,toolbar=no,location=no,status=no');
        
         } else if (typeof destLatOrType === 'number' && typeof destLon === 'number') {
-          // If lat/lon coordinates are passed, open a directions map
           const { lat, lon } = currentLocation || {};
           if (lat && lon) {
             const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destLatOrType},${destLon}&origin=${lat},${lon}`;
@@ -186,7 +177,7 @@ function Shopping() {
         <NavigationBar />
         <div className="Shopping">
             <h1>Shopping</h1>
-            {/* Category Filter Buttons */}
+
             <div className="filter-buttons">
                 {['All', 'Clothing', 'Furniture', 'Food', 'Appliances', 'Hardware', 'Other'].map(category => (
                     <Button
@@ -201,8 +192,8 @@ function Shopping() {
                     style={{
                         backgroundColor: (category === "All" && selectedCategories.size === 0) || selectedCategories.has(category) ? 'black' : '#808080',
                         color: 'white',
-                        border: '1px solid black', // black outline
-                        margin: '5px' // add spacing between buttons
+                        border: '1px solid black',
+                        margin: '5px'
                     }}
                   >
                       {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -212,7 +203,7 @@ function Shopping() {
             </div>
 
 
-            {/* Sort Selector */}
+
             <div className="sort-container">
                 <label htmlFor="sort">Sort by:</label>
                 <select id="sort" value={sortCriteria} onChange={handleSortChange}>
@@ -221,7 +212,7 @@ function Shopping() {
                 </select>
             </div>
 
-            {/* Accordion Container */}
+
             <div className="accordion-container">
                 <Accordion defaultActiveKey={null}>
                     {filteredAndSortedItems.map(item => (

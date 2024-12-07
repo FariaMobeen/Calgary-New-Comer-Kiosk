@@ -5,8 +5,8 @@
 .App-header {
   background-color: #282c34;
   min-height: 19vmin;
-  font-size: 2rem; /* Adjust size as needed */
-  font-weight: bold; /* Optional: makes the text stand out more */
+  font-size: 2rem;
+  font-weight: bold;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -42,7 +42,6 @@
   margin-top: 30px;
 }
 
-/* Align the title in the center and back button on the left */
 .HomePageTitle {
   position: relative;
   display: flex;
@@ -52,13 +51,11 @@
   text-align: center;
 }
 
-/* Position the back button on the left side */
 .BackButton1 {
-  left: 1rem; /* Adjust as needed for spacing */
+  left: 1rem;
   position: absolute;
 }
 
-/* Center the title in the remaining space */
 .HomePageTitle h1 {
   margin: 0;
 }
@@ -71,25 +68,22 @@
   margin-top: 20px;
 }
 
-/* Ensure all card images are the same size and scale properly */
 .ChoicesContainer .card-img-top {
   width: 100%;
-  height: 150px; /* Adjust height as needed for uniform sizing */
-  object-fit: contain; /* Ensures the entire image fits within the given dimensions */
-  border-radius: 5px; /* Optional: to match the Card component's style */
-  padding: 10px; /* Optional: add spacing around images */
+  height: 150px;
+  object-fit: contain;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .ChoicesContainer .row {
   justify-content: center;
 }
 
-/* Fixed card height for uniformity */
 .ChoicesContainer .card {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Card body styling for consistent spacing */
 .ChoicesContainer .card-body {
   padding: 15px;
   display: flex;
@@ -97,15 +91,14 @@
   justify-content: space-between;
 }
 
-/* Button alignment */
 .ChoicesContainer .btn {
   margin-top: auto;
 }
 
 .NavBar {
-  display: flex; /* Flexbox layout */
-  align-items: center; /* Vertically center items */
-  width: 100%; /* Full width of the page */
+  display: flex;
+  align-items: center;
+  width: 100%;
 
   padding: 1rem 1rem;
 }
@@ -113,6 +106,6 @@
 
 
 .NavRight {
-  margin-left: auto; /* This will push the EndSessionButton to the far right */
+  margin-left: auto;
 }
 

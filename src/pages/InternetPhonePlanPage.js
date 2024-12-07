@@ -121,7 +121,6 @@ function InternetPhonePlanPage() {
                 </div>
             </div>
 
-            {/* Warning Modal */}
             <Modal show={showWarningModal} onHide={() => setShowWarningModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Caution</Modal.Title>

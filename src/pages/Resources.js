@@ -3,7 +3,6 @@ import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../style/resources.css'; 
-//import '../style/transportation.css'; 
 import ImmigrantServicesCalgaryQR from '../images/resources-images/immigrantservicescalgaryQR.png';
 import CPLQR from '../images/resources-images/CPLQR.png';
 import CIWAQR from '../images/resources-images/CIWAQR.png';
@@ -17,7 +16,7 @@ function Resources() {
     const [showModal, setShowModal] = useState(false);
     const [currentImage, setCurrentImage] = useState('');
     const [selectedCategories, setSelectedCategories] = useState(new Set()); 
-    const [currentLocation, setCurrentLocation] = useState(null); // Store the kiosk's current location
+    const [currentLocation, setCurrentLocation] = useState(null);
     const [showWarningModal, setShowWarningModal] = useState(false);
     const [link, setLink] = useState(null);
 
@@ -34,7 +33,7 @@ function Resources() {
           eventKey: '0', 
           categories: ['Employment', 'Finances', 'Other'], 
           relevancy: { 'Employment': 2, 'Finances': 2, 'Other': 5 }, 
-          location: { lat: 51.0499, lon: -114.0718 }//there are multiple locations
+          location: { lat: 51.0499, lon: -114.0718 }
       },
       { 
           title: "Calgary Immigrant Women's Association", 
@@ -62,20 +61,17 @@ function Resources() {
 
     useEffect(() => {
                 setCurrentLocation({
-                    //lat: position.coords.latitude,
-                    //lon: position.coords.longitude,
-                    lat: 51.044313574830255,//default location (calgary tower)
+                    lat: 51.044313574830255,
                     lon: -114.06309093347211,
                 });
     }, []);
 
-    // Function to calculate distance between two locations
     const calculateDistance = (loc1, loc2) => {
       if (!loc1 || !loc2 || loc1.lat === undefined || loc1.lon === undefined || loc2.lat === undefined || loc2.lon === undefined) {
-          return Infinity; // Return a large distance if any location data is missing
+          return Infinity;
       }
   
-      const R = 6371; // Radius of the Earth in km
+      const R = 6371;
       const dLat = (loc2.lat - loc1.lat) * (Math.PI / 180);
       const dLon = (loc2.lon - loc1.lon) * (Math.PI / 180);
       const a =
@@ -84,7 +80,7 @@ function Resources() {
           Math.cos(loc2.lat * (Math.PI / 180)) *
           Math.sin(dLon / 2) * Math.sin(dLon / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      return R * c; // Distance in km
+      return R * c;
     };
 
     const handleWarningModal = (site) => {
@@ -92,7 +88,6 @@ function Resources() {
         setShowWarningModal(true);
     };
     
-    // Sort items by proximity or relevancy
     const sortAccordionItems = (items) => {
       if (sortCriteria === 'distance') {
         return [...items].sort((a, b) => calculateDistance(currentLocation, a.location) - calculateDistance(currentLocation, b.location));
@@ -100,25 +95,22 @@ function Resources() {
         return [...items].sort((a, b) => {
           let relevancyA, relevancyB;
     
-          // Determine the relevancy to use
-          if (selectedCategories.size === 0) {  // If "All" is selected (size is 0)
+          if (selectedCategories.size === 0) {
             relevancyA = Math.max(...Object.values(a.relevancy));
             relevancyB = Math.max(...Object.values(b.relevancy));
-          } else { // Otherwise, calculate relevancy based on selected categories
+          } else {
             relevancyA = Math.max(...[...selectedCategories].map(cat => a.relevancy[cat] || 0));
             relevancyB = Math.max(...[...selectedCategories].map(cat => b.relevancy[cat] || 0));
           }
     
-          // Sort primarily by relevancy
           if (relevancyA !== relevancyB) {
             return relevancyB - relevancyA;
           }
     
-          // If relevancy is the same, sort by proximity
           return calculateDistance(currentLocation, a.location) - calculateDistance(currentLocation, b.location);
         });
       }
-      return [...items]; // Default sort if needed
+      return [...items];
     };
     
 
@@ -139,10 +131,10 @@ function Resources() {
     const toggleCategory = (category) => {
       setSelectedCategories(() => {
           if (category === "") {
-              return new Set(); // If "All" is selected, clear all other selections.
+              return new Set();
           } else {
               const newCategories = new Set();
-              newCategories.add(category); // Only add the clicked category.
+              newCategories.add(category);
               return newCategories;
           }
       });
@@ -150,7 +142,6 @@ function Resources() {
   
     const filteredAndSortedItems = sortAccordionItems(
         accordionItems.filter(item =>
-          // Ensure that every selected category is in the item's categories
           [...selectedCategories].every(selectedCategory => item.categories.includes(selectedCategory))
         )
     );
@@ -162,14 +153,12 @@ function Resources() {
 
     const openMapPopup = (destLatOrType, destLon) => {
         if (typeof destLatOrType === 'string') {
-          // If a string like "mall" is passed, open a search on Google Maps
           const { lat, lon } = currentLocation || {};
-          const searchQuery = encodeURIComponent(destLatOrType); // Encode the search term
+          const searchQuery = encodeURIComponent(destLatOrType);
           const mapsUrl = `https://www.google.com/maps/search/${searchQuery}/@${lat},${lon},15z`;
           window.open(mapsUrl, 'MapPopup', 'width=800,height=600,menubar=no,toolbar=no,location=no,status=no');
        
         } else if (typeof destLatOrType === 'number' && typeof destLon === 'number') {
-          // If lat/lon coordinates are passed, open a directions map
           const { lat, lon } = currentLocation || {};
           if (lat && lon) {
             const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destLatOrType},${destLon}&origin=${lat},${lon}`;
@@ -188,7 +177,6 @@ function Resources() {
         <NavigationBar />
         <div className="Resources">
             <h1>Resources</h1>
-            {/* Category Filter Buttons */}
             <div className="filter-buttons">
                 {['All', 'Employment', 'Finances', 'Housing', 'Food', 'Childcare', 'Communities', 'Mental Health', 'Other'].map(category => (
                     <Button
@@ -203,8 +191,8 @@ function Resources() {
                     style={{
                         backgroundColor: (category === "All" && selectedCategories.size === 0) || selectedCategories.has(category) ? 'black' : '#808080',
                         color: 'white',
-                        border: '1px solid black', // black outline
-                        margin: '5px' // add spacing between buttons
+                        border: '1px solid black',
+                        margin: '5px'
                     }}
                   >
                       {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -213,8 +201,6 @@ function Resources() {
                 ))}
             </div>
 
-
-            {/* Sort Selector */}
             <div className="sort-container">
                 <label htmlFor="sort">Sort by:</label>
                 <select id="sort" value={sortCriteria} onChange={handleSortChange}>
@@ -224,7 +210,6 @@ function Resources() {
                 </select>
             </div>
 
-            {/* Accordion Container */}
             <div className="accordion-container">
                 <Accordion defaultActiveKey={null}>
                     {filteredAndSortedItems.map(item => (

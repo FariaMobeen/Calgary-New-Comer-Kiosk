@@ -6,17 +6,17 @@ import "../App.css";
 
 function EndSessionModal() {
   const [show, setShow] = useState(false);
-  const [countdown, setCountdown] = useState(15); // Countdown starts at 15 seconds
+  const [countdown, setCountdown] = useState(15);
   const navigate = useNavigate();
 
   const handleClose = () => {
     setShow(false);
-    setCountdown(30); // Reset countdown when modal closes
+    setCountdown(30);
   };
 
   const handleShow = () => {
     setShow(true);
-    setCountdown(30); // Reset countdown when modal opens
+    setCountdown(30);
   };
 
   useEffect(() => {
@@ -24,11 +24,11 @@ function EndSessionModal() {
     if (show && countdown > 0) {
       timer = setTimeout(() => {
         setCountdown((prev) => prev - 1);
-      }, 1000); // Decrease countdown by 1 every second
+      }, 1000);
     } else if (show && countdown === 0) {
-      navigate('/'); // Navigate to '/' when countdown reaches 0
+      navigate('/');
     }
-    return () => clearTimeout(timer); // Cleanup timer
+    return () => clearTimeout(timer);
   }, [show, countdown, navigate]);
 
   return (

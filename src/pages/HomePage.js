@@ -35,7 +35,7 @@ function HomePage() {
       </div>
 
       <Container className="ChoicesContainer">
-        <Row className="g-4"> {/* g-4 adds spacing between cards */}
+        <Row className="g-4"> 
         
         <Col xs={12} sm={6} md={4} lg={3} className="h-100">
           <Card style={{ width: '18rem', height: '18rem' }}>

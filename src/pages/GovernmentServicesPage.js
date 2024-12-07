@@ -70,13 +70,11 @@ function GovernmentServicesPage() {
     const [redirectUrl, setRedirectUrl] = useState('');
     const [currentQR, setCurrentQR] = useState('');
 
-    // Show the QR code modal
     const handleShowQRModal = (qrImage) => {
         setCurrentQR(qrImage);
         setShowQRModal(true);
     };
 
-    // Show the warning modal
     const handleShowWarningModal = (url) => {
         setRedirectUrl(url);
         setShowWarningModal(true);
@@ -85,7 +83,7 @@ function GovernmentServicesPage() {
     const handleCloseModal = () => {
         setShowWarningModal(false);
         setShowQRModal(false);
-        setCurrentQR(''); // Reset the QR when modal is closed
+        setCurrentQR('');
     };
 
     const handleConfirmRedirect = () => {
@@ -139,7 +137,6 @@ function GovernmentServicesPage() {
                     </Accordion>
                 </div>
 
-                {/* Warning Modal */}
                 <Modal show={showWarningModal} onHide={handleCloseModal} centered>
                     <Modal.Header closeButton>
                         <Modal.Title>Caution</Modal.Title>
@@ -157,7 +154,6 @@ function GovernmentServicesPage() {
                     </Modal.Footer>
                 </Modal>
 
-                {/* QR Code Modal */}
                 <Modal show={showQRModal} onHide={handleCloseModal} centered>
                     <Modal.Header closeButton>
                         <Modal.Title>View Mobile Site</Modal.Title>
